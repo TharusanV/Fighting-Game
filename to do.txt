@@ -1,0 +1,12 @@
+
+1. Game Loop (Done)
+2. Drawing textures to the screen (Done)
+3. Moving Characters (Done)
+4. Collision/Gravity/Physics
+	4a. Collision boundary creator (Done)
+	4b. Collision detection
+	4c. Collision Resolution
+5. Animations
+6. Map/Level files/Scrolling Tile maps
+7. Camera follows the player
+8. Projectiles/Map Animation
