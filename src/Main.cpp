@@ -9,6 +9,8 @@
 #include "SpriteEntity.hpp"
 #include "Utils.hpp"
 
+//mingw32-make -f MakeFile
+
 int main(int argc, char* args[]){
 	if (SDL_Init(SDL_INIT_VIDEO) > 0){
     std::cout << "SDL_Init -> SDL_ERROR: " << SDL_GetError() << std::endl;
@@ -17,12 +19,16 @@ int main(int argc, char* args[]){
 	if (!(IMG_Init(IMG_INIT_PNG))){
     std::cout << "IMG_init -> Error: " << SDL_GetError() << std::endl;
   }
-		
 
-	RenderWindow window("Vanquish", 1280, 720);
+	int WIDTH = 1536;
+	int HEIGHT = 704;	
 
+	RenderWindow window("Vanquish", WIDTH, HEIGHT);
 	std::cout << window.getRefreshRate() << std::endl;
-	//SDL_Texture* stage = window.loadTexture("res/gfx/map1.png")
+
+	SDL_Texture* stageTexture = window.loadTexture("res/gfx/stage_standstill.png");
+
+	Entity stage(Vector2f(0,0), stageTexture, 1536, 704, Vector2f(1,1));
 
 	bool gameRunning = true;
 	SDL_Event event;
@@ -53,7 +59,7 @@ int main(int argc, char* args[]){
 
 		window.clear();
 		
-		//window.render(stage);
+		window.render(stage);
 
 		window.display();
 
