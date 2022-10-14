@@ -4,9 +4,10 @@
 #include <SDL_image.h>
 #include "Math.hpp"
 
+
 //Constructor used for textures
-Entity::Entity(Vector2f p_pos, SDL_Texture* p_tex, int width, int height,Vector2f p_scale, int frames) 
-: pos(p_pos), texture(p_tex), scale(p_scale){
+Entity::Entity(Vector2f p_pos, SDL_Texture* p_tex, int width, int height,Vector2f p_scale,bool animated, int frames) 
+: pos(p_pos), tex(p_tex), scale(p_scale){
     currentFrame.x = 0;
     currentFrame.y = 0;
     currentFrame.w = width;
@@ -14,7 +15,7 @@ Entity::Entity(Vector2f p_pos, SDL_Texture* p_tex, int width, int height,Vector2
 }
 
 SDL_Texture* Entity::getTex() {
-    return texture;
+    return tex;
 }
 
 SDL_Rect Entity::getCurrentFrame() {
