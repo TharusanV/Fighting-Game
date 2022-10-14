@@ -17,6 +17,9 @@ int main(int argc, char* args[]){
 		
 
 	RenderWindow window("Vanquish", 1280, 720);
+
+	//SDL_Texture* stage = window.loadTexture("res/gfx/map1.png")
+
 	bool gameRunning = true;
 	SDL_Event event;
 
@@ -28,6 +31,8 @@ int main(int argc, char* args[]){
 		}
 
 		window.clear();
+		
+		//window.render(stage);
 
 		window.display();
 	}

@@ -1,5 +1,6 @@
 #include <iostream>
 #include "RenderWindow.hpp"
+#include "Entity.hpp"
 
 RenderWindow::RenderWindow(const char* p_title, int p_w, int p_h)
 	:window(NULL), renderer(NULL)
@@ -32,8 +33,22 @@ void RenderWindow::clear(){
 	SDL_RenderClear(renderer);
 }
 
-void RenderWindow::render(SDL_Texture* p_texture){
-	SDL_RenderCopy(renderer, p_texture, NULL, NULL);
+void RenderWindow::render(Entity& p_entity){
+  //This structure explains how big the source is (image) and where you want to start rendering
+  SDL_Rect src;
+  src.x = p_entity.getCurrentFrame().x;
+  src.y = p_entity.getCurrentFrame().y;
+  src.w = p_entity.getCurrentFrame().w;
+  src.h = p_entity.getCurrentFrame().h;
+
+  //This structure explains the destination of the final output
+  SDL_Rect dst;
+  dst.x = p_entity.getPos().x;
+  dst.y = p_entity.getPos().y;
+  dst.w = p_entity.getCurrentFrame().w * (p_entity).getXScale();
+  dst.h = p_entity.getCurrentFrame().h * (p_entity).getYScale();
+
+	SDL_RenderCopy(renderer, p_entity.getTex(), &src, &dst);
 }
 
 void RenderWindow::display(){
