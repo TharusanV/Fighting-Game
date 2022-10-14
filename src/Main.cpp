@@ -22,11 +22,14 @@ int main(int argc, char* args[]){
 
 	while (gameRunning){
 		// Get our controls and events
-		while (SDL_PollEvent(&event))
-		{
+		while (SDL_PollEvent(&event)){
 			if (event.type == SDL_QUIT)
 				gameRunning = false;
 		}
+
+		window.clear();
+
+		window.display();
 	}
 
 	window.cleanUp();
