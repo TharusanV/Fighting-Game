@@ -28,8 +28,10 @@ int main(int argc, char* args[]){
 	std::cout << window.getRefreshRate() << std::endl;
 
 	SDL_Texture* stageTexture = window.loadTexture("res/gfx/stage1.png");
+	SDL_Texture* player1Texture = window.loadTexture("res/gfx/sprite-1.png");
 
 	Map stage(Vector2f(0,0), stageTexture, 1536, 5632, Vector2f(1,1), 1, 8);
+	SpriteEntity player1(Vector2f(0,180), player1Texture, 1600, 400, Vector2f(4,4), 200, 8, 2);
 
 	bool gameRunning = true;
 	SDL_Event event;
@@ -49,10 +51,12 @@ int main(int argc, char* args[]){
 
 		keyState = SDL_GetKeyboardState(NULL);
 		stage.update(delta);
+		player1.update(delta, keyState);
 
 		window.clear();
 		
 		window.render(stage);
+		window.render(player1);
 
 		window.display();
 

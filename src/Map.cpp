@@ -24,7 +24,7 @@ void Map::update(float delta){
   if(isActive){
 		frameCounter += delta; 
 
-		if(frameCounter >= 0.25f){
+		if(frameCounter >= 0.15f){
 			frameCounter = 0; 
 			currentFrame.y += frameHeight; 
 			if(currentFrame.y >= textureHeight)
