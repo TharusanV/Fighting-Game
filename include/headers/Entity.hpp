@@ -15,6 +15,7 @@ class Entity {
         float getXScale();
         float getYScale();
         SDL_Texture* getTex();
+        void setTex(SDL_Texture* changedTex);
         SDL_Rect getCurrentFrame();
         void init();
         virtual void update() {};

@@ -7,7 +7,8 @@
 #include "RenderWindow.hpp"
 #include "Entity.hpp"
 #include "SpriteEntity.hpp"
-#include "Utils.hpp"
+#include "Map.hpp"
+
 
 //mingw32-make -f MakeFile
 
@@ -26,36 +27,28 @@ int main(int argc, char* args[]){
 	RenderWindow window("Vanquish", WIDTH, HEIGHT);
 	std::cout << window.getRefreshRate() << std::endl;
 
-	SDL_Texture* stageTexture = window.loadTexture("res/gfx/stage_standstill.png");
+	SDL_Texture* stageTexture = window.loadTexture("res/gfx/stage1.png");
 
-	Entity stage(Vector2f(0,0), stageTexture, 1536, 704, Vector2f(1,1));
+	Map stage(Vector2f(0,0), stageTexture, 1536, 5632, Vector2f(1,1), 1, 8);
 
 	bool gameRunning = true;
 	SDL_Event event;
-	const float timeStep = 0.01f;
-	float accumulator = 0.0f;
-	float currentTime = utils::hireTimeInSeconds();
+	int currentTime = 0; 
+	int prevTime = 0; 
+	float delta = 0.0f;
+	const Uint8 *keyState;
 
 	while (gameRunning){
-		int startTicks = SDL_GetTicks();
-
-		float newTime = utils::hireTimeInSeconds();
-		float frameTime = newTime - currentTime;
-		Uint64 startFrame= SDL_GetPerformanceCounter();
-
-		currentTime = newTime;
-		accumulator += frameTime;
-
-		// Get our controls and events
-		while (accumulator >= timeStep) {
-			while (SDL_PollEvent(&event)){
-				if (event.type == SDL_QUIT)
-					gameRunning = false;
-			}
-			accumulator -= timeStep;
+		prevTime = currentTime; 
+		currentTime = SDL_GetTicks(); 
+		delta = (currentTime - prevTime) / 1000.0f;
+		while (SDL_PollEvent(&event)){
+			if (event.type == SDL_QUIT)
+				gameRunning = false;
 		}
 
-		const float alpha = accumulator / timeStep;
+		keyState = SDL_GetKeyboardState(NULL);
+		stage.update(delta);
 
 		window.clear();
 		
@@ -63,10 +56,6 @@ int main(int argc, char* args[]){
 
 		window.display();
 
-		int frameTicks = SDL_GetTicks() - startTicks;
-		if (frameTicks < 1000 / window.getRefreshRate()) {
-			SDL_Delay(1000 / window.getRefreshRate() - frameTicks);
-		}
 	}
 
 	window.cleanUp();

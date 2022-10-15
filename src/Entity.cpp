@@ -22,6 +22,10 @@ SDL_Rect Entity::getCurrentFrame() {
     return currentFrame;
 }
 
+void Entity::setTex(SDL_Texture* changedTex){
+    tex = changedTex;
+}
+
 float Entity::getXScale() {
     return scale.x;
 }
