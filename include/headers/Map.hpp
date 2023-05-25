@@ -6,7 +6,7 @@
 
 class Map : public Entity {
   public:
-    Map(Vector2f p_pos, SDL_Texture* p_tex, int p_width, int p_height, Vector2f p_scale, int p_framesX=1, int p_framesY=1);
+    Map(SDL_Renderer *renderTarget, SDL_Texture* p_tex, Vector2f p_pos, int width, int height, Vector2f scale, int p_framesX=1, int p_framesY=1);
     void update(float delta);
     void init();  
   
